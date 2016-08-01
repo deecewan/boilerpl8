@@ -1,0 +1,49 @@
+{
+  "name": "react-express-stage-0",
+  "version": "0.0.1",
+  "description": "A starter kit that sets up a project to use express and react, supporting live reloading and ES2015/2016/stage-0",
+  "main": "index.js",
+  "scripts": {
+    "serve:dev": "NODE_ENV=development babel-node index.js",
+    "webpack:server": "BUILD=server babel-node tools/build.js",
+    "webpack:client": "BUILD=client babel-node tools/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Buchan-Swanson",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.11.4",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-runtime": "^6.12.0",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2016": "^6.11.3",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.2.2",
+    "extend": "^3.0.0",
+    "json-loader": "^0.5.4",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-transform-hmr": "^1.0.4",
+    "webpack": "^1.13.1",
+    "webpack-config": "^5.2.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "babel-runtime": "^6.11.6",
+    "express": "^4.14.0",
+    "source-map-support": "^0.4.2"
+  }
+}
