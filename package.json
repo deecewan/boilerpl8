@@ -1,5 +1,5 @@
 {
-  "name": "react-express-stage-0",
+  "name": "express-react-boilerplate",
   "version": "0.0.1",
   "description": "A starter kit that sets up a project to use express and react, supporting live reloading and ES2015/2016/stage-0",
   "main": "index.js",
