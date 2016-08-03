@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "serve:dev": "NODE_ENV=development babel-node index.js",
-    "webpack:server": "BUILD=server babel-node tools/build.js",
-    "webpack:client": "BUILD=client babel-node tools/build.js",
+    "build": "BUILD=all babel-node tools/build.js",
+    "build:server": "BUILD=server babel-node tools/build.js",
+    "build:client": "BUILD=client babel-node tools/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Buchan-Swanson",

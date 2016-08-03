@@ -3,8 +3,9 @@ import serverConfig from '../webpack.server';
 import clientConfig from '../webpack.client';
 
 const buildType = process.env.BUILD;
+const buildAll = process.env.BUILD === 'all';
 
-if (buildType === 'server') {
+if (buildAll || buildType === 'server') {
   webpack(serverConfig, (err, stats) => {
     if (err) {
       console.error(err);
@@ -13,7 +14,9 @@ if (buildType === 'server') {
       stats.toJson('errors-only').errors.forEach(error => console.log(error));
     }
   });
-} else if (buildType === 'client') {
+}
+
+if (buildAll || buildType === 'client') {
   webpack(clientConfig, (err, stats) => {
     if (err) {
       console.error(err);
