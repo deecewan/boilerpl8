@@ -14,7 +14,12 @@ export default new Config().merge({
     extensions: ['', '.js', '.jsx'],
   },
   stats: {
-    color: true,
+    colors: true,
+    hash: false,
+    timings: true,
+    chunks: false,
+    chunkModules: false,
+    modules: false,
   },
   module: {
     preLoaders: [

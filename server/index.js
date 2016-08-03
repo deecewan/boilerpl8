@@ -1,5 +1,6 @@
-import express from 'express';
 import path from 'path';
+import chokidar from 'chokidar';
+import express from 'express';
 const app = express();
 
 // setup webpack to compile
@@ -24,6 +25,9 @@ if (process.env.NODE_ENV === 'development') {
   }));
   app.use(webpackHotMiddleware(compiler));
 
+/* This comes from Glenjamin's Ultimate Hot Reloading Example
+ * ( https://github.com/glenjamin/ultimate-hot-reloading-example ) */
+
 // Do "hot-reloading" of react stuff on the server
 // Throw away the cached client modules and let them be re-required next time
   compiler.plugin('done', () => {
@@ -32,8 +36,20 @@ if (process.env.NODE_ENV === 'development') {
       if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id];
     });
   });
+
+  const watcher = chokidar.watch('./server');
+
+  watcher.on('ready', () => {
+    watcher.on('all', () => {
+      console.log('Clearing /server/ module cache from server');
+      Object.keys(require.cache).forEach(id => {
+        if (/[\/\\]server[\/\\]/.test(id)) delete require.cache[id];
+      });
+    });
+  });
 }
 
+app.use('/dist', express.static('dist'));
 app.use('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
 });
