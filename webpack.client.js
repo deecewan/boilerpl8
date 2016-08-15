@@ -8,7 +8,7 @@ export default new Config().merge(config).merge({
     './client/index.jsx',
   ],
   output: {
-    publicPath: '/',
+    publicPath: '/dist',
     filename: 'client.js',
   },
   plugins: [
