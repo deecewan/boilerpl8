@@ -23,7 +23,7 @@ for changes made inside `/server`.
     - to build both server and client, `npm run build`
     - to build the server only, `npm run build:server`
     - to build the client only, `npm run build:client`
-    - the builds are available in `/dist` [(see below)](#project-structure)
+    - the builds are available in `/dist`  [(see below)](#project-structure)
 - Testing is not yet implemented
     - look forward to mocha and chai expect
     - clientside tests are up to you
