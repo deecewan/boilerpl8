@@ -1,17 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
-import Root from './components/Root';
+import App from './components/App';
 import store from './store';
-/**
- * the react application mount point
- */
-const mountNode = document.getElementById('app');
 
-/*
- * mounts react to DOM
- */
-ReactDOM.render(
-  <Root />,
-  mountNode
+render(
+  <Provider store={store}>
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
+  </Provider>,
+  document.getElementById('app')
 );

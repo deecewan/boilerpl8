@@ -1,6 +1,15 @@
-import { createStore } from 'redux';
-import app from './reducer';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Map } from 'immutable';
+import thunk from 'redux-thunk';
 
-const store = createStore(app, window.devToolsExtension && window.devToolsExtension());
+import app from './reducers';
 
-export default store;
+const initialState = new Map();
+
+export default createStore(app,
+  initialState,
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+);

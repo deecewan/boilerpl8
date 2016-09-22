@@ -1,57 +1,67 @@
-import path from 'path';
-import chokidar from 'chokidar';
-import express from 'express';
-const app = express();
+// node_modules imports
+import { Router } from 'express';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import redisStore from 'connect-redis';
+import morgan from 'morgan';
 
-// setup webpack to compile
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.client';
+import './lib/loadConfig';
 
-if (process.env.NODE_ENV === 'development') {
-  // only run the webpack auto-compilation on development
-  const compiler = webpack(config, (err, stats) => {
-    if (err) {
-      console.log(err);
-    }
-    if (stats.hasErrors()) {
-      stats.toJson('errors-only').errors.forEach(error => console.log(error));
-    }
-  });
+// Project imports
+import Database from './models/index';
+import passport from './lib/passport';
+import routes from './routes';
+import Tanda from './lib/tanda';
+import Uber from './lib/uber';
 
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: '/',
-  }));
-  app.use(webpackHotMiddleware(compiler));
+const HOUR = 3600;
 
-/* This comes from Glenjamin's Ultimate Hot Reloading Example
- * ( https://github.com/glenjamin/ultimate-hot-reloading-example ) */
+const db = new Database();
+db.syncModels();
+const tanda = new Tanda();
+const uber = new Uber();
 
-// Do "hot-reloading" of react stuff on the server
-// Throw away the cached client modules and let them be re-required next time
-  compiler.plugin('done', () => {
-    console.log('Clearing /client/ module cache from server');
-    Object.keys(require.cache).forEach(id => {
-      if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id];
-    });
-  });
+const app = new Router();
 
-  const watcher = chokidar.watch('./server');
+const RedisStore = redisStore(session);
 
-  watcher.on('ready', () => {
-    watcher.on('all', () => {
-      console.log('Clearing /server/ module cache from server');
-      Object.keys(require.cache).forEach(id => {
-        if (/[\/\\]server[\/\\]/.test(id)) delete require.cache[id];
-      });
-    });
-  });
-}
+app.use(morgan('dev'));
+app.use(cookieParser(process.env.SESSION_SECRET || 'youwontguessit'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  store: new RedisStore({
+    host: process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1',
+    port: process.env.REDIS_PORT_6379_TCP_PORT || '6379',
+    ttl: 12 * HOUR,
+  }),
+  secret: process.env.SESSION_SECRET || 'youwontguessit',
+  resave: true,
+  saveUninitialized: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    return next();
+  }
+  // debug route
+  console.log('------------------');
+  return next();
+});
+app.use((req, res, next) => tanda.refresh(req, res, next));
+app.use((req, res, next) => uber.refresh(req, res, next));
+app.use(routes);
 
-app.use('/dist', express.static('dist'));
-app.use('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
+app.use((err, req, res, next) => {
+  console.log(err);
+  if (process.env.NODE_ENV === 'dev') {
+    return res.status(500).json(err);
+  }
+  res.status(500).json({ message: 'An unexpected error has occurred.' +
+  '  Please refresh and try again.' });
+  return next();
 });
 
 export default app;

@@ -1,14 +1,23 @@
 import webpack from 'webpack';
-import Config from 'webpack-config';
 import path from 'path';
+import Dash from 'webpack-dashboard/plugin'; // eslint-disable-line
+import qs from 'querystring';
 
-export default new Config().merge({
+const cssQuery = qs.stringify({
+  modules: true,
+  importLoaders: 1,
+  localIdentName: '[path][name]-[local]',
+});
+
+const config = {
   entry: [
     'babel-polyfill',
+    './client/index.jsx',
   ],
-  devtool: 'inline-source-map',
   output: {
     path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -36,13 +45,21 @@ export default new Config().merge({
         exclude: /(node_modules|bower_components)/,
         query: {
           presets: [
-            'react-hmre',
+            'es2015',
+            'es2016',
+            'stage-0',
           ],
+          plugins: ['transform-runtime'],
         },
       },
       {
         test: /\.json$/,
         loader: 'json-loader',
+      },
+      {
+        test: /\.css$/,
+        include: path.join(__dirname, 'client', 'styles'),
+        loader: `style-loader!css-loader?${cssQuery}`,
       },
     ],
   },
@@ -50,4 +67,13 @@ export default new Config().merge({
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
   ],
-});
+};
+
+if (process.env.NODE_ENV === 'development') {
+  config.entry.splice(1, 0, 'webpack-hot-middleware/client');
+  config.plugins.push(new webpack.HotModuleReplacementPlugin(), new Dash());
+  config.module.loaders[0].query.presets.push('react-hmre');
+  config.devtool = 'inline-source-map';
+}
+
+export default config;
