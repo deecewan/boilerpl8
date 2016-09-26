@@ -15,6 +15,9 @@
           "locals": ["module"]
         }]
       }]]
+    },
+    "test": {
+      "plugins": ["istanbul"]
     }
   },
   "ignore": "node_modules"
