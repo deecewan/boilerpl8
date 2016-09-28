@@ -13,8 +13,8 @@ export default class App extends React.Component {
     return (
       <div>
         <h1>Hello, {this.state.name}.</h1>
-        <label>Enter your name.</label>
-        <input onChange={e => this.setState({ name: e.target.value })} />
+        <label htmlFor="name">Enter your name.</label>
+        <input name="name" onChange={e => this.setState({ name: e.target.value })} />
       </div>
     );
   }

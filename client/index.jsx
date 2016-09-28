@@ -7,9 +7,7 @@ import store from './store';
 
 render(
   <Provider store={store}>
-    <MuiThemeProvider>
-      <App />
-    </MuiThemeProvider>
+    <App />
   </Provider>,
   document.getElementById('app')
 );
