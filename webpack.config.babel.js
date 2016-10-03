@@ -15,9 +15,9 @@ const config = {
     './client/index.jsx',
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'static'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: '/static/',
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -59,7 +59,7 @@ const config = {
       {
         test: /\.css$/,
         include: path.join(__dirname, 'client', 'styles'),
-        loader: `style-loader!css-loader?${cssQuery}`,
+        loaders: ['style', `css?${cssQuery}`, 'sass?sourceMap'],
       },
     ],
   },

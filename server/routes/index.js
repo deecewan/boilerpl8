@@ -14,9 +14,9 @@ fs
     router.use(`/api/${routeName}`, route);
   });
 
-router.use('/static', express.static(path.join(__dirname, '..', 'static')));
+router.use('/static', express.static(path.join(__dirname, '..', '..', 'static')));
 
-router.get('/', (req, res) => {
+router.get('/', function index(req, res) {
   res.sendFile(path.join(__dirname, '..', '..', 'dist', 'index.html'));
 });
 

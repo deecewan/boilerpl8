@@ -31,8 +31,14 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+// passport goes here, if you're using it.
+
+app.use(function devInfo(req, res, next){
+  console.log(req);
+  console.log(app);
+  next();
+});
+
 app.use(routes);
 
 app.use((err, req, res, next) => {
