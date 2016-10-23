@@ -1,19 +1,12 @@
 import webpack from 'webpack';
 import path from 'path';
 import Dash from 'webpack-dashboard/plugin'; // eslint-disable-line
-import qs from 'querystring';
-
-const cssQuery = qs.stringify({
-  modules: true,
-  importLoaders: 1,
-  localIdentName: '[path][name]-[local]',
-});
 
 const config = {
   entry: [
     'react-hot-loader/patch',
     'babel-polyfill',
-    './client/index.jsx',
+    './src/client/index.jsx',
   ],
   output: {
     path: path.join(__dirname, 'static'),

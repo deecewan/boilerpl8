@@ -10,9 +10,11 @@ import chalk from 'chalk';
 import figlet from 'figlet';
 import reporter from './server/lib/webpackReporter';
 
+import { name } from '../package.json';
+
 env.config();
 
-figlet.text(`Welcome to \n ${process.env.APPLICATION_NAME || 'Boilerpl8'}`, {
+figlet.text(`Welcome to \n ${process.env.APPLICATION_NAME || name}`, {
   verticalLayout: 'full',
   kerning: 'fitted',
 }, (err, data) => {
@@ -23,7 +25,7 @@ figlet.text(`Welcome to \n ${process.env.APPLICATION_NAME || 'Boilerpl8'}`, {
 
 const app = express();
 if (process.env.NODE_ENV === 'development') {
-  const config = require('./webpack.config.babel').default; // eslint-disable-line
+  const config = require('../webpack.config.babel.js').default; // eslint-disable-line
   const compiler = webpack(config);
 
 // Serve hot-reloading bundle to client
@@ -32,10 +34,6 @@ if (process.env.NODE_ENV === 'development') {
     reporter,
   }));
   app.use(webpackHotMiddleware(compiler));
-
-  app.use((req, res, next) => {
-    require('./server').default(req, res, next); // eslint-disable-line global-require
-  });
 
   const watcher = chokidar.watch('./server');
 
@@ -56,11 +54,12 @@ if (process.env.NODE_ENV === 'development') {
       if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id];
     });
   });
-} else {
-  const routes = require('./out').default; // eslint-disable-line
-
-  app.use(routes);
 }
+
+app.use((req, res, next) => {
+  require('./server').default(req, res, next); // eslint-disable-line global-require
+});
+
 
 const server = http.createServer(app);
 server.listen(process.env.PORT || 3000, '0.0.0.0', err => {

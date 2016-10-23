@@ -39,7 +39,7 @@ router.delete('/:id', async (req, res) => {
   await db.models.User.delete({
     where: {
       id: req.params.id,
-    }
+    },
   });
   return res.sendStatus(204);
 });

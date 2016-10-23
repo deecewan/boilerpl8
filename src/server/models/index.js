@@ -26,9 +26,9 @@ export default class Database {
       dialect: 'postgres',
       logging: (...args) => {
         if ([
-            'development',
-            // 'testing',
-          ].indexOf(process.env.NODE_ENV) > 0) {
+          'development',
+          // 'testing',
+        ].indexOf(process.env.NODE_ENV) > 0) {
           console.log(args); // eslint-disable-line no-console
         }
       },
