@@ -6,17 +6,20 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import env from 'dotenv';
+import chalk from 'chalk';
+import reporter from './server/lib/webpackReporter';
 
 env.config();
 
 const app = express();
 if (process.env.NODE_ENV === 'development') {
-  const config = require('./webpack.config.babel').default;
+  const config = require('./webpack.config.babel').default; // eslint-disable-line
   const compiler = webpack(config);
 
 // Serve hot-reloading bundle to client
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
+    reporter,
   }));
   app.use(webpackHotMiddleware(compiler));
 
@@ -28,7 +31,7 @@ if (process.env.NODE_ENV === 'development') {
 
   watcher.on('ready', () => {
     watcher.on('all', () => {
-      console.log('Clearing /server/ module cache from server');
+      console.log(chalk.yellow('Hot-reloading server modules...'));
       Object.keys(require.cache).forEach(id => {
         if (/[\/\\]server[\/\\]/.test(id)) delete require.cache[id];
       });
@@ -54,6 +57,6 @@ server.listen(3000, '0.0.0.0', err => {
   if (err) throw err;
 
   const addr = server.address();
-
-  console.log('Listening at http://%s:%d', addr.address, addr.port);
+  console.log(chalk.blue.bold('Server Started!'));
+  console.log(chalk.cyan(`Listening at http://${addr.address}:${addr.port}`));
 });
