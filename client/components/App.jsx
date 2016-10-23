@@ -1,21 +1,21 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { updateName } from '../actions/name';
+import { update } from '../actions/name';
 
 function AppComponent(props) {
   return (
     <div>
-      <h1>Hello, {props.name}.</h1>
       <label htmlFor="name">Enter your name: </label>
-      <input name="name" onChange={e => props.updateName(e.target.value)} />
+      <input name="name" onChange={e => props.update(e.target.value)} />
+      <h1>Hello, {props.name}.</h1>
     </div>
   );
 }
 
 AppComponent.propTypes = {
   name: PropTypes.string,
-  updateName: PropTypes.func,
+  update: PropTypes.func,
 };
 
 function mapStateToProps(state) {
@@ -24,6 +24,6 @@ function mapStateToProps(state) {
   };
 }
 
-const App = connect(mapStateToProps, { updateName })(AppComponent);
+const App = connect(mapStateToProps, { update })(AppComponent);
 
 export { App as default };

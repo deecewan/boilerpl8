@@ -7,14 +7,14 @@ const initialState = new Map({
   name: '',
 });
 
-function updateName(state, value) {
+function update(state, value) {
   return state.set('name', value);
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case actions.UPDATE:
-      return updateName(state, action.value);
+      return update(state, action.value);
     default:
       return state;
   }

@@ -24,6 +24,15 @@ Of course, change those DB urls to whatever they need to be on your machine.
 
 Next, run [`yarn`](https://yarnpkg.com/en/docs/install) to install dependencies.
 
+Do yourself a favour and get [redux-dev-tools](https://github.com/gaearon/redux-devtools) for 
+Chrome, by the amazing [Dan Abramov](https://github.com/gaearon).  This project is set up to 
+support it in development mode.  Have a look at it when you're playing around with the app.  See what 
+ happens when you drag the slider back and forth.
+ 
+You also will probably want [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+by [Facebook](https://code.facebook.com/).  It shows you the Chrome Elements layout, with your 
+React elements.  Also shows you the props, state and store for every component, and gives you 
+access to them via the Chrome console.
 
 ## Usage
 

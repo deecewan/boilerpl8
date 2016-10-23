@@ -3,7 +3,7 @@ export const actions = {
   UPDATE: 'NAME_UPDATE',
 };
 
-export function updateName(value) {
+export function update(value) {
   return {
     value,
     type: actions.UPDATE,
