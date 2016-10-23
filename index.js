@@ -7,9 +7,19 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import env from 'dotenv';
 import chalk from 'chalk';
+import figlet from 'figlet';
 import reporter from './server/lib/webpackReporter';
 
 env.config();
+
+figlet.text(`Welcome to \n ${process.env.APPLICATION_NAME || 'Boilerpl8'}`, {
+  verticalLayout: 'full',
+  kerning: 'fitted',
+}, (err, data) => {
+  if (!err) {
+    console.log(chalk.green(data));
+  }
+});
 
 const app = express();
 if (process.env.NODE_ENV === 'development') {
@@ -47,13 +57,13 @@ if (process.env.NODE_ENV === 'development') {
     });
   });
 } else {
-  const routes = require('./out').default; // eslint-disable-line global-require
+  const routes = require('./out').default; // eslint-disable-line
 
   app.use(routes);
 }
 
 const server = http.createServer(app);
-server.listen(3000, '0.0.0.0', err => {
+server.listen(process.env.PORT || 3000, '0.0.0.0', err => {
   if (err) throw err;
 
   const addr = server.address();
