@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { update } from '../actions/name';
 
-function AppComponent(props) {
+export function AppComponent(props) {
   return (
     <div>
       <label htmlFor="name">Enter your name: </label>

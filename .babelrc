@@ -7,11 +7,11 @@
   ],
   "env": {
     "development": {
-      "plugins": ["react-hot-loader/babel"]
+      "plugins": ["react-hot-loader/babel", "transform-runtime"]
     },
     "test": {
+      "sourceMaps": "inline",
       "plugins": ["istanbul"]
     }
-  },
-  "ignore": "node_modules"
+  }
 }
