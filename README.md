@@ -103,9 +103,9 @@ automatically split by Redux's `combineReducers` function.  Additionally, I use 
 to ensure that state changes are reflected, and easy to reason about.  The project contains 
 `redux-immutable` to allow all parts of the state to be Immutable objects.
 
-There is no styling library included with the project, because I still haven't found one I truly 
-like.  I'm not a fan of inline styles, but I'm also a big fan on keeping styles close to where 
-they are used, and scoped.  Maybe one day.
+CSS Modules with PostCSS is included.  There are [some](https://github.com/postcss/postcss) 
+[great](http://cssnext.io/) [resources](https://ismamz.github.io/postcss-utilities/docs) 
+resources included by default, and you can find more at [PostCSS](https://github.com/postcss/postcss).
 
 `./client/components/App.jsx` is a pure, stateless component, but you can do what you like to it.
 Currently, it hot reloads, and all sub-components of it should also do it.  The console will warn
