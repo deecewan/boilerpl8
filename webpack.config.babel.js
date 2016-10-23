@@ -1,6 +1,10 @@
 import webpack from 'webpack';
 import path from 'path';
 import Dash from 'webpack-dashboard/plugin'; // eslint-disable-line
+import Extracter from 'extract-text-webpack-plugin';
+
+// postcss plugins
+import cssnext from 'postcss-cssnext';
 
 const config = {
   entry: [
@@ -42,21 +46,41 @@ const config = {
         test: /\.json$/,
         loader: 'json-loader',
       },
+
     ],
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
+    new Extracter('styles.css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
   ],
+  postcss() {
+    return [
+      cssnext,
+    ];
+  },
 };
 
 if (process.env.NODE_ENV === 'development') {
   config.entry.splice(1, 0, 'webpack-hot-middleware/client');
   config.plugins.push(new webpack.HotModuleReplacementPlugin(), new Dash());
   config.devtool = 'inline-source-map';
+  config.module.loaders.push({
+    test: /\.css$/,
+    loader: 'style-loader!' +
+    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!' +
+    'postcss-loader?sourceMap=inline',
+  });
+} else {
+  config.module.loaders.push({
+    test: /\.css$/,
+    loader: Extracter.extract('style-loader',
+      'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!' +
+      'postcss-loader?sourceMap=inline'),
+  });
 }
 
 export default config;
