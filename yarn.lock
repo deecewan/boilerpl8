@@ -1781,6 +1781,10 @@ css-color-names@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
 
+css-font-weight-names@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/css-font-weight-names/-/css-font-weight-names-0.2.1.tgz#5710d485ad295f6b3f1ceec41f882e324a46b516"
+
 css-loader:
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-0.25.0.tgz#c3febc8ce28f4c83576b6b13707f47f90c390223"
@@ -2246,6 +2250,10 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
+"eslint-config-10up@github:jonathantneal/eslint-config-10up":
+  version "1.0.0"
+  resolved "https://codeload.github.com/jonathantneal/eslint-config-10up/tar.gz/24665145d4cab2777a14637aa72f96867fcbf910"
+
 eslint-config-airbnb-base@^5.0.2:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-5.0.3.tgz#9714ac35ec2cd7fab0d44d148a9f91db2944074d"
@@ -2308,7 +2316,7 @@ eslint-plugin-react@^6.1.0:
     doctrine "^1.2.2"
     jsx-ast-utils "^1.3.1"
 
-eslint@^3.3.0:
+eslint@^3.3.0, eslint@^3.7.0:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.8.1.tgz#7d02db44cd5aaf4fa7aa489e1f083baa454342ba"
   dependencies:
@@ -3343,6 +3351,10 @@ js-yaml@^3.4.3, js-yaml@^3.5.1, js-yaml@~3.6.1:
 jsbn@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.0.tgz#650987da0dd74f4ebf5a11377a2aa2d273e97dfd"
+
+"jscs-config-10up@github:jonathantneal/jscs-config-10up":
+  version "1.0.0"
+  resolved "https://codeload.github.com/jonathantneal/jscs-config-10up/tar.gz/76d0182d05e0e9f754f43c404832171a86570e63"
 
 jsesc@^1.3.0:
   version "1.3.0"
@@ -4531,6 +4543,13 @@ postcss-font-variant@^2.0.0:
   dependencies:
     postcss "^5.0.4"
 
+postcss-font-weights@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-font-weights/-/postcss-font-weights-2.0.1.tgz#a85dd7b51aa7691b95c9bc0269f412756c91931d"
+  dependencies:
+    css-font-weight-names "^0.2.1"
+    postcss "^5.0.12"
+
 postcss-initial@^1.3.1:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/postcss-initial/-/postcss-initial-1.5.2.tgz#61eb5ad871e7991aadfb3f497b16fe61aea92ffb"
@@ -4749,13 +4768,91 @@ postcss-selector-parser@^1.1.4:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.0:
+postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.0, postcss-selector-parser@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-2.2.1.tgz#fdbf696103b12b0a64060e5610507f410491f7c8"
   dependencies:
     flatten "^1.0.2"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
+
+postcss-short:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-short/-/postcss-short-2.0.1.tgz#805e4b94e3eb3e13aaba203a95ea2557637852d6"
+  dependencies:
+    eslint "^3.7.0"
+    eslint-config-10up "github:jonathantneal/eslint-config-10up"
+    jscs-config-10up "github:jonathantneal/jscs-config-10up"
+    object-assign "^4.1.0"
+    postcss "^5.2.4"
+    postcss-font-weights "^2.0.1"
+    postcss-short-border "^1.0.0"
+    postcss-short-border-radius "^1.0.0"
+    postcss-short-color "^1.0.0"
+    postcss-short-data "^1.1.0"
+    postcss-short-font-size "^2.0.0"
+    postcss-short-position "^1.0.0"
+    postcss-short-size "^1.1.0"
+    postcss-short-spacing "^1.0.0"
+    postcss-short-text "^1.1.0"
+    stylelint-config-10up "github:jonathantneal/stylelint-config-10up"
+
+postcss-short-border-radius@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-border-radius/-/postcss-short-border-radius-1.0.0.tgz#7eace6a154c8f87dffeeb1a9a49e28b6f0193862"
+  dependencies:
+    postcss "^5.2.4"
+    postcss-selector-parser "^2.2.1"
+    postcss-value-parser "^3.3.0"
+
+postcss-short-border@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-border/-/postcss-short-border-1.0.0.tgz#7519868e9863ccd69ad5af4b986e1d99f1f5bee4"
+  dependencies:
+    postcss "^5.0.8"
+
+postcss-short-color@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-color/-/postcss-short-color-1.0.0.tgz#c7b79c9b4b66120dde5f648091ae7d4ba86e3a76"
+  dependencies:
+    postcss "^5.0.4"
+
+postcss-short-data@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-data/-/postcss-short-data-1.1.0.tgz#4e7ac80a173b6ec4dde0acd8205cd282cb4f8330"
+  dependencies:
+    postcss "^5.0.12"
+
+postcss-short-font-size@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-font-size/-/postcss-short-font-size-2.0.0.tgz#0695df05920f020b3ce836e889c12a33cfc3e57c"
+  dependencies:
+    postcss "^5.0.4"
+
+postcss-short-position@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-position/-/postcss-short-position-1.0.0.tgz#32bf54df3597ed56fe4e1bab216d4759cb2f75de"
+  dependencies:
+    postcss "^5.0.5"
+
+postcss-short-size@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-size/-/postcss-short-size-1.1.0.tgz#4a7c9c5bd9b21f5f68457521b0cfaddb9e1727b1"
+  dependencies:
+    postcss "^5.0.19"
+
+postcss-short-spacing@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-spacing/-/postcss-short-spacing-1.0.0.tgz#cb19037e61213d0c872b486fdb5c601a4ea9571d"
+  dependencies:
+    postcss "^5.0.4"
+
+postcss-short-text@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-short-text/-/postcss-short-text-1.1.0.tgz#93c4ee645a09262df45c1a7f53421184f0ecb14b"
+  dependencies:
+    object-assign "^4.0.1"
+    postcss "^5.0.4"
 
 postcss-svgo@^2.1.1:
   version "2.1.5"
@@ -4773,6 +4870,13 @@ postcss-unique-selectors@^2.0.2:
     alphanum-sort "^1.0.1"
     postcss "^5.0.4"
     uniqs "^2.0.0"
+
+postcss-utilities:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/postcss-utilities/-/postcss-utilities-0.5.1.tgz#424b8a219e54fb5321313491e70a1daaae879b4d"
+  dependencies:
+    postcss "^5.0.16"
+    postcss-value-parser "^3.3.0"
 
 postcss-value-parser@^3.0.1, postcss-value-parser@^3.0.2, postcss-value-parser@^3.1.1, postcss-value-parser@^3.1.2, postcss-value-parser@^3.2.3, postcss-value-parser@^3.3.0:
   version "3.3.0"
@@ -5725,6 +5829,10 @@ style-loader:
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.13.1.tgz#468280efbc0473023cd3a6cd56e33b5a1d7fc3a9"
   dependencies:
     loader-utils "^0.2.7"
+
+"stylelint-config-10up@github:jonathantneal/stylelint-config-10up":
+  version "1.0.0"
+  resolved "https://codeload.github.com/jonathantneal/stylelint-config-10up/tar.gz/48d324a9e10099a1160bb1cf32a06919f0864298"
 
 supports-color@^2.0.0:
   version "2.0.0"

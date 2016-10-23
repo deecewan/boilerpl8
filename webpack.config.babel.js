@@ -5,6 +5,8 @@ import Extracter from 'extract-text-webpack-plugin';
 
 // postcss plugins
 import cssnext from 'postcss-cssnext';
+import short from 'postcss-short';
+import utilities from 'postcss-utilities';
 
 const config = {
   entry: [
@@ -60,6 +62,8 @@ const config = {
   postcss() {
     return [
       cssnext,
+      short,
+      utilities,
     ];
   },
 };

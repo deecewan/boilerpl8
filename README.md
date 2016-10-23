@@ -103,7 +103,7 @@ automatically split by Redux's `combineReducers` function.  Additionally, I use 
 to ensure that state changes are reflected, and easy to reason about.  The project contains 
 `redux-immutable` to allow all parts of the state to be Immutable objects.
 
-CSS Modules with PostCSS is included.  There are [some](https://github.com/postcss/postcss) 
+CSS Modules with PostCSS is included.  There are [some](https://github.com/jonathantneal/postcss-short) 
 [great](http://cssnext.io/) [resources](https://ismamz.github.io/postcss-utilities/docs) 
 resources included by default, and you can find more at [PostCSS](https://github.com/postcss/postcss).
 
