@@ -1,4 +1,7 @@
 # boilerpl8
+
+> A somewhat opinionated, hot-reloading boilerplate for React + Redux, Express, and SQL.
+
 ```
  __        __   _                            _
  \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___
