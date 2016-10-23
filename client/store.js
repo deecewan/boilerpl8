@@ -10,6 +10,7 @@ export default createStore(app,
   initialState,
   compose(
     applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    window.devToolsExtension && process.env.NODE_ENV === 'development'
+      ? window.devToolsExtension() : f => f
   )
 );

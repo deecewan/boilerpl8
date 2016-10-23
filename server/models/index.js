@@ -2,8 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
 
-import config from '../lib/config';
-
 let db = null;
 
 export default class Database {
@@ -14,13 +12,13 @@ export default class Database {
 
     switch (process.env.NODE_ENV) {
       case 'development':
-        this.url = config.database.development;
+        this.url = process.env.DB_DEVELOPMENT;
         break;
       case 'testing':
-        this.url = config.database.testing;
+        this.url = process.env.DB_TESTING;
         break;
       default:
-        this.url = process.env.DATABASE_URL || config.database.production;
+        this.url = process.env.DB_PRODUCTION;
         break;
     }
     this.models = {};
@@ -28,9 +26,9 @@ export default class Database {
       dialect: 'postgres',
       logging: (...args) => {
         if ([
-          'development',
-          // 'testing',
-        ].indexOf(process.env.NODE_ENV) > 0) {
+            'development',
+            // 'testing',
+          ].indexOf(process.env.NODE_ENV) > 0) {
           console.log(args); // eslint-disable-line no-console
         }
       },

@@ -4,35 +4,52 @@ Up and running with express, react and mocha/chai.
 
 TODO:
 
-- [ ] add a style framework
 - [ ] add a test framework
 - [ ] make a better example
 
 PRs always wanted/welcome.
 
+## Getting Started
+
+First, create a file in the root of the directory called `.env`.  In here, you should have the 
+following structure, at a minimum.  Put any other environment variables you like in there, too.
+
+```sh
+DB_PRODUCTION=
+DB_TESTING=postgres://test:test@127.0.0.1/project_test
+DB_DEVELOPMENT=postgres://user:passsword@127.0.0.1/project
+```
+
+Of course, change those DB urls to whatever they need to be on your machine.
+
+Next, run [`yarn`](https://yarnpkg.com/en/docs/install) to install dependencies.
+
+
 ## Usage
 
-Everything is layed out in a pretty logical order.  All your server-side code goes into `./server` and client-side goes 
-into `./client`.
+Once your DB is running, and you've run `yarn`, run `npm run serve:dev` to start the server.
 
-To start, run `npm install` and then `npm run serve:dev`.  If you want webpack-dashboard, run `npm run serve:dash`.
+This will, by default, start on `http://0.0.0.0:3000`.  To change the port, add a `PORT=<port>` 
+to your `.env` file.
 
-From there, everything inside of `./server/routes` will hot reload.  Also, everything in `./client` _should_ live 
-reload.  There are limitations, but your console will tell you when you need a hard reload.
+A lot of the things are automatically included, if you put them into the right place.
 
-### Tests
+All reducers in the `./client/reducers` folder are included onto the store by default.  Just add 
+a new file with your reducer.
 
-Testing is setup.  There are folders under `./test`, but you aren't required to use them.  Any `*_test.js` files inside
-of `./test` will get hit.
+All routes in `./server/routes` are included by default, and are routed to `/api/<route_name>`.  
+You can change this by playing around inside on `./server/routes/index.js`.  Note that all index 
+serves in `index.html`.  All other routes should be inside seperate files.  See the `user` example.
 
-This also includes coverage, which will print out once your tests are complete.
+`./static` is served at `/static`.  Put all static files in here, and reference them accordingly.
+  Note that webpack will serve a `bundle.js` file from here, so don't put a file in there called 
+  that.  When you build the project for production, that file will be placed in there.
 
-## Deployment
+#### Notes
 
-I haven't really found the best way of doing this, but the way I currently do it is:
+This project, and most definitely this README is a work in progress.  I update it after almost 
+every project I start from it, so I wouldn't go staking your life's work on it.  Almost every 
+update is completely breaking.
 
-- `npm run build`
-
-This will produce a `bundle.js` file inside of `./dist`.  It will produce a `./out` folder with serverside code.  This 
- can be run `npm start`, and this will run your project in 'production' mode, with node rather than babel-node.
- 
+It is a good place to start if you want to see how a project is set up.  It is also good if you 
+want to see how you can incorporate hot-reloading into your existing project.

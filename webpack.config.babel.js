@@ -11,6 +11,7 @@ const cssQuery = qs.stringify({
 
 const config = {
   entry: [
+    'react-hot-loader/patch',
     'babel-polyfill',
     './client/index.jsx',
   ],
@@ -43,36 +44,25 @@ const config = {
         test: /\.jsx?$/,
         loader: 'babel',
         exclude: /(node_modules|bower_components)/,
-        query: {
-          presets: [
-            'es2015',
-            'es2016',
-            'stage-0',
-          ],
-          plugins: ['transform-runtime'],
-        },
       },
       {
         test: /\.json$/,
         loader: 'json-loader',
-      },
-      {
-        test: /\.css$/,
-        include: path.join(__dirname, 'client', 'styles'),
-        loaders: ['style', `css?${cssQuery}`, 'sass?sourceMap'],
       },
     ],
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
   ],
 };
 
 if (process.env.NODE_ENV === 'development') {
   config.entry.splice(1, 0, 'webpack-hot-middleware/client');
   config.plugins.push(new webpack.HotModuleReplacementPlugin(), new Dash());
-  config.module.loaders[0].query.presets.push('react-hmre');
   config.devtool = 'inline-source-map';
 }
 
