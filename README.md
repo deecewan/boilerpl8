@@ -1,4 +1,7 @@
 # boilerpl8
+
+> A somewhat opinionated, hot-reloading boilerplate for React + Redux, Express, and SQL.
+
 ```
  __        __   _                            _
  \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___
@@ -88,6 +91,9 @@ Change the version by setting the `API_VERSION` environment variable.  I would r
 modifying the index.  It is set up to serve the Webpack bundle, as well and the index.
 
 You should only need to add route files to `./server/routes` and models to `./server/models`.
+
+If you want a route that isn't attached to `/api/v1/<route_name>`, simply name the route file 
+`__<route_name>.js` and it will be attached at `/<route_name>`.
 
 ### Client
 

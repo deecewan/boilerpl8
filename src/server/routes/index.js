@@ -11,7 +11,12 @@ fs
     const routeName = file.substring(0, file.length - 3);
     // eslint-disable-next-line global-require
     const route = require(path.resolve(__dirname, file)).default;
-    router.use(`/api/v${process.env.API_VERSION || 1}/${routeName}`, route);
+    if (routeName.startsWith('__')) {
+      // not an API route
+      router.use(`/${routeName.substr(2)}`, route);
+    } else {
+      router.use(`/api/v${process.env.API_VERSION || 1}/${routeName}`, route);
+    }
   });
 
 router.use('/static', express.static(path.resolve('static')));
