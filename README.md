@@ -92,6 +92,9 @@ modifying the index.  It is set up to serve the Webpack bundle, as well and the 
 
 You should only need to add route files to `./server/routes` and models to `./server/models`.
 
+If you want a route that isn't attached to `/api/v1/<route_name>`, simply name the route file 
+`__<route_name>.js` and it will be attached at `/<route_name>`.
+
 ### Client
 
 The client contains all the React code.
